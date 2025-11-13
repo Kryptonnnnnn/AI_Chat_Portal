@@ -3,15 +3,14 @@ services:
     name: ai-chat-backend
     runtime: python
     plan: free
-    buildCommand: pip install --upgrade pip setuptools wheel && pip install -r requirements.txt
-    startCommand: gunicorn manage:app --bind 0.0.0.0:$PORT
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn chat_project.wsgi:application --bind 0.0.0.0:$PORT"
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.9
-```
-
-**Option B: Using `.python-version` file**
-
-Create a file named `.python-version` in your backend root:
-```
-3.11.9
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: False
+      - key: DJANGO_SETTINGS_MODULE
+        value: chat_project.settings
