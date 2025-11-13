@@ -1,22 +1,11 @@
-Flask==3.0.0
-flask-cors==4.0.0
+Django==4.2.7
+djangorestframework==3.14.0
+django-cors-headers==4.3.0
 gunicorn==21.2.0
+whitenoise==6.6.0
 python-dotenv==1.0.0
-openai==1.3.0
-anthropic==0.7.0
-langchain==0.1.0
-# Add any other dependencies your project needs
-Django>=4.2.0
-djangorestframework>=3.14.0
-django-cors-headers>=4.3.0
-gunicorn>=21.2.0
-whitenoise>=6.6.0
-psycopg2-binary>=2.9.9  # If using PostgreSQL
-python-dotenv>=1.0.0
-# Add your other dependencies (openai, anthropic, etc.)
-# For Ollama integration (instead of OpenAI)
 requests==2.32.3
+scikit-learn==1.3.2
+numpy==1.26.4
 langchain==0.1.0
 langchain-community==0.0.20
-
-# Any other packages you need
