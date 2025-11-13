@@ -7,7 +7,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-key-change-this')
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com']  # Changed this
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -36,14 +36,11 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'chat_project.urls'
 WSGI_APPLICATION = 'chat_project.wsgi.application'
 
+# Use SQLite for now (simpler for deployment)
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DATABASE_NAME', 'ai_chat_portal'),
-        'USER': os.getenv('DATABASE_USER', 'postgres'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD', ''),
-        'HOST': os.getenv('DATABASE_HOST', 'localhost'),
-        'PORT': os.getenv('DATABASE_PORT', '5432'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -66,6 +63,7 @@ TEMPLATES = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    # Add your Vercel URL here after frontend deployment
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -83,5 +81,10 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
+
+# Static files configuration
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
